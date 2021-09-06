@@ -1,4 +1,4 @@
-package br.com.falae;
+package br.com.falae.activities.main;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,6 +9,10 @@ import android.widget.EditText;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
+
+import br.com.falae.services.FirebaseService;
+import br.com.falae.singletons.Info;
+import br.com.falae.R;
 
 public class FirstFragment extends Fragment {
 
@@ -34,6 +38,10 @@ public class FirstFragment extends Fragment {
                 Info info = Info.getInstance();
 
                 info.putInfo("NICKNAME", nickname);
+                FirebaseService fs = new FirebaseService();
+                String myip = Info.getIPAddress(true);
+                info.putInfo("IP", myip);
+                fs.saveUser(nickname, myip);
 
 
                 NavHostFragment.findNavController(FirstFragment.this)

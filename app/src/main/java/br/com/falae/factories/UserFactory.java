@@ -26,6 +26,17 @@ public class UserFactory {
         return users;
     }
 
+    public static List<User> getMockUsers(int qtd) {
+        List<User> users = new ArrayList<>();
+
+        for(int i =0; i < qtd; i++) {
+            User u = new User("USER "+String.valueOf(i), "01.02.010.2");
+            users.add(u);
+        }
+        return users;
+
+    }
+
 
 
 }

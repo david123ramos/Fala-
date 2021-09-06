@@ -1,4 +1,4 @@
-package br.com.falae;
+package br.com.falae.activities.chat;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
+
+import br.com.falae.R;
 
 public class Second2Fragment extends Fragment {
 

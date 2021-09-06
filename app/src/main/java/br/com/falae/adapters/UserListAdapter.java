@@ -44,7 +44,7 @@ public class UserListAdapter extends ArrayAdapter<User> {
         }
 
 
-        holder.nicknameLabel.setText(this.users.get(position).getNick());
+        holder.nicknameLabel.setText(this.users.get(position).getNick()+" "+this.users.get(position).getIp());
         return listItem;
     }
 

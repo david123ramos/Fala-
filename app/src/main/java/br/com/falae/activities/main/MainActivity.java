@@ -1,4 +1,4 @@
-package br.com.falae;
+package br.com.falae.activities.main;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
+
+import br.com.falae.R;
 
 public class MainActivity extends AppCompatActivity {
 

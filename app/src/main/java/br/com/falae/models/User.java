@@ -2,12 +2,13 @@ package br.com.falae.models;
 
 public class User {
     private String nick;
-    private String IP;
+    private String ip;
 
     public User(String nick, String ip) {
         this.nick = nick;
-        this.IP = ip;
+        this.ip = ip;
     }
+    public User(){}
 
     public String getNick() {
         return nick;
@@ -17,11 +18,11 @@ public class User {
         this.nick = nick;
     }
 
-    public String getIP() {
-        return IP;
+    public String getIp() {
+        return ip;
     }
 
     public void setIP(String IP) {
-        this.IP = IP;
+        this.ip = IP;
     }
 }

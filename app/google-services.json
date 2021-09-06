@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "853705579148",
+    "project_id": "falae-ed664",
+    "storage_bucket": "falae-ed664.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:853705579148:android:f3ec09db72f36dae9939a9",
+        "android_client_info": {
+          "package_name": "br.com.falae"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "853705579148-32o6u4njddeptf0g5lioppfolmqbtjk9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB3DKUE-xY9L6vREdMk0kut76IKYytJWKw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "853705579148-32o6u4njddeptf0g5lioppfolmqbtjk9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

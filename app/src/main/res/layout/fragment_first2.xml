@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".First2Fragment">
+    tools:context=".activities.chat.First2Fragment">
 
     <LinearLayout
         android:id="@+id/chatcontainer"
@@ -13,9 +13,20 @@
         android:layout_marginBottom="70dp"
         android:orientation="horizontal"
         />
+    <ListView
+        android:id="@+id/list_view"
+        android:layout_width="410dp"
+        android:layout_height="515dp"
+        android:layout_marginTop="100dp"
+        android:divider="@android:color/transparent"
+        android:scrollbars="none"
+        android:dividerHeight="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/chatcontainer" />
 
     <EditText
-        android:id="@+id/msg"
+        android:id="@+id/msg_box"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginLeft="20dp"
@@ -28,6 +39,7 @@
         />
 
     <Button
+        android:id="@+id/btn_send_message"
         android:layout_width="49dp"
         android:layout_height="48dp"
         android:layout_marginEnd="16dp"
