@@ -21,10 +21,12 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import br.com.falae.R;
+import br.com.falae.adapters.MessagesListAdapter;
 import br.com.falae.adapters.UserListAdapter;
 import br.com.falae.echoserver.engine.ClientConnectionWrapper;
 import br.com.falae.echoserver.engine.Server;
 import br.com.falae.echoserver.engine.ServerService;
+import br.com.falae.echoserver.engine.ServerThread;
 import br.com.falae.models.User;
 import br.com.falae.singletons.Info;
 
@@ -41,21 +43,23 @@ public class ChatActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         //ServerService ss = new ServerService();
-        startService(new Intent(this, ServerService.class));
+        //startService(new Intent(this, ServerService.class));
+        new ServerThread(this).start();
 
         User client = (User) Info.getInstance().getInfo("CHOOSENCHAT");
-        AsyncTask<User, Void, ClientConnectionWrapper> d = new Server().execute(client);
-        try {
-            receiver = d.get();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        //AsyncTask<User, Void, ClientConnectionWrapper> d = new Server().execute(client);
+//        try {
+//            receiver = d.get();
+//        } catch (ExecutionException e) {
+//            e.printStackTrace();
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
 
-        //  final ListView listView = (ListView) findViewById(R.id.list_view);
-        //  adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.activity_chat, messages);
-        //  listView.setAdapter(adapter);
+        ListView listView = (ListView) findViewById(R.id.list_view_chat);
+        adapter = new MessagesListAdapter(this, R.layout.messages_list, this.messages);
+
+        listView.setAdapter(adapter);
 
         final Button sendMessageButton = (Button) findViewById(R.id.btn_send_message);
         final EditText textBox = (EditText) findViewById(R.id.msg_box);
@@ -63,12 +67,24 @@ public class ChatActivity extends AppCompatActivity {
         sendMessageButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 String text = textBox.getText().toString();
-                messages.add(text);
-                //  adapter.notifyDataSetChanged();
+
+                if(!text.trim().equals("")) {
+                    messages.add(text);
+                    incommingMessage();
+                }
+
+                textBox.setText("");
             }
         });
+    }
 
+    public void addMessage(String msg) {
+        messages.add(msg);
+        this.incommingMessage();
+    }
 
+    private void incommingMessage() {
+        adapter.notifyDataSetChanged();
     }
 
 }

@@ -14,7 +14,7 @@
         android:orientation="horizontal"
         />
     <ListView
-        android:id="@+id/list_view"
+        android:id="@+id/list_view_chat"
         android:layout_width="410dp"
         android:layout_height="515dp"
         android:layout_marginTop="100dp"
@@ -23,7 +23,7 @@
         android:dividerHeight="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/chatcontainer" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/msg_box"

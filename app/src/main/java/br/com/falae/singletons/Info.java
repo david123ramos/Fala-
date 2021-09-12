@@ -4,9 +4,12 @@ import android.content.Context;
 import android.net.wifi.WifiManager;
 import android.text.format.Formatter;
 
+import java.net.Inet4Address;
+import java.net.Inet6Address;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.util.Collections;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,30 +42,27 @@ public class Info {
         return this.map.get(key);
     }
 
-    public static String getIPAddress(boolean useIPv4) {
-        try {
-            List<NetworkInterface> interfaces = Collections.list(NetworkInterface.getNetworkInterfaces());
-            for (NetworkInterface intf : interfaces) {
-                List<InetAddress> addrs = Collections.list(intf.getInetAddresses());
-                for (InetAddress addr : addrs) {
-                    if (!addr.isLoopbackAddress()) {
-                        String sAddr = addr.getHostAddress();
+    public static String getIPAddress() throws Exception {
+        String resultIpv6 = "";
+        String resultIpv4 = "";
 
-                        boolean isIPv4 = sAddr.indexOf(':')<0;
+        for (Enumeration en = NetworkInterface.getNetworkInterfaces();
+             en.hasMoreElements();) {
 
-                        if (useIPv4) {
-                            if (isIPv4)
-                                return sAddr;
-                        } else {
-                            if (!isIPv4) {
-                                int delim = sAddr.indexOf('%'); // drop ip6 zone suffix
-                                return delim<0 ? sAddr.toUpperCase() : sAddr.substring(0, delim).toUpperCase();
-                            }
-                        }
+            NetworkInterface intf = (NetworkInterface) en.nextElement();
+            for (Enumeration enumIpAddr = intf.getInetAddresses();
+                 enumIpAddr.hasMoreElements();) {
+
+                InetAddress inetAddress = (InetAddress) enumIpAddr.nextElement();
+                if(!inetAddress.isLoopbackAddress()){
+                    if (inetAddress instanceof Inet4Address) {
+                        resultIpv4 = inetAddress.getHostAddress().toString();
+                    } else if (inetAddress instanceof Inet6Address) {
+                        resultIpv6 = inetAddress.getHostAddress().toString();
                     }
                 }
             }
-        } catch (Exception ignored) { } // for now eat exceptions
-        return "";
+        }
+        return ((resultIpv4.length() > 0) ? resultIpv4 : resultIpv6);
     }
 }

@@ -39,7 +39,12 @@ public class FirstFragment extends Fragment {
 
                 info.putInfo("NICKNAME", nickname);
                 FirebaseService fs = new FirebaseService();
-                String myip = Info.getIPAddress(true);
+                String myip = null;
+                try {
+                    myip = Info.getIPAddress();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 info.putInfo("IP", myip);
                 fs.saveUser(nickname, myip);
 

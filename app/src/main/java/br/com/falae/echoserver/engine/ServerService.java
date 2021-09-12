@@ -35,13 +35,18 @@ public class ServerService extends Service {
 
     @Override
     public void onCreate() {
+        super.onCreate();
 
+        System.out.println("=======> SERVIDOR INICIADO NA PORTA: "+5423);
+        //System.out.println(serverSocket.getLocalSocketAddress().toString());
 
     }
 
     @Override
     public void onDestroy() {
+        super.onDestroy();
         Toast.makeText(this, "Service stopped", Toast.LENGTH_LONG).show();
+
     }
 
 
@@ -65,29 +70,29 @@ public class ServerService extends Service {
                 }
                 //while (true) {
                 Socket client = null;
-                try {
-
-                    client = serverSocket.accept();
-                    DataOutputStream dOut = new DataOutputStream(client.getOutputStream());
-                    Scanner input = new Scanner(client.getInputStream());
-
-                    Message m = gson.fromJson(input.nextLine(), Message.class);
-
-
-                    switch (m.getEvent()) {
-
-                        case "MYNAMEIS":
-
-                            //TODO: SE COMUNICAR COM THREAD DA UI PARA A ATUALIZAÇÃO DE PESSOAS ONLINE
-
-                            break;
-                    }
-                    input.close();
-
-
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+//                try {
+//
+//                    client = serverSocket.accept();
+//                    DataOutputStream dOut = new DataOutputStream(client.getOutputStream());
+//                    Scanner input = new Scanner(client.getInputStream());
+//
+//                    Message m = gson.fromJson(input.nextLine(), Message.class);
+//
+//
+//                    switch (m.getEvent()) {
+//
+//                        case "MYNAMEIS":
+//
+//                            //TODO: SE COMUNICAR COM THREAD DA UI PARA A ATUALIZAÇÃO DE PESSOAS ONLINE
+//
+//                            break;
+//                    }
+//                    input.close();
+//
+//
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
                 //}
                 //return super.onStartCommand(intent, flags, startId);
             }
