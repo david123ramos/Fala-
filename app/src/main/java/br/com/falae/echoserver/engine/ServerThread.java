@@ -70,7 +70,8 @@ public class ServerThread extends Thread {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        act.addMessage(client.getNick()+" "+input + "  at ( " +act.getTime()+ ")");
+                        Message m = new Message(client.getNick(),act.getTime(),input);
+                        act.addMessage(m);
                     }
                 });
 

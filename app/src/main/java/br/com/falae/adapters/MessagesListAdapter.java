@@ -10,13 +10,14 @@ import android.widget.TextView;
 import java.util.List;
 
 import br.com.falae.R;
+import br.com.falae.echoserver.engine.Message;
 import br.com.falae.models.User;
 
-public class MessagesListAdapter extends ArrayAdapter<String> {
+public class MessagesListAdapter extends ArrayAdapter<Message> {
 
 
-    private List<String> messages;
-    public MessagesListAdapter(Context context, int resource, List<String> msgs) {
+    private List<Message> messages;
+    public MessagesListAdapter(Context context, int resource, List<Message> msgs) {
         super(context, resource, msgs);
         this.messages = msgs;
     }
@@ -33,7 +34,10 @@ public class MessagesListAdapter extends ArrayAdapter<String> {
 
             holder = new ViewHolder();
 
+            holder.message_sender = (TextView) listItem.findViewById(R.id.message_sender);
             holder.message_text = (TextView) listItem.findViewById(R.id.message_text);
+
+
             listItem.setTag(holder);
 
         } else {
@@ -41,14 +45,16 @@ public class MessagesListAdapter extends ArrayAdapter<String> {
             holder = (ViewHolder)view.getTag();
         }
 
-
-        holder.message_text.setText(this.messages.get(position));
+        Message m = this.messages.get(position);
+        holder.message_sender.setText(m.getNick() + " - " + m.getHour());
+        holder.message_text.setText(m.getMsg());
         return listItem;
     }
 
 
     static class ViewHolder {
         TextView message_text;
+        TextView message_sender;
     }
 }
 

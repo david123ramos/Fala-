@@ -2,28 +2,38 @@ package br.com.falae.echoserver.engine;
 
 import java.io.Serializable;
 
-public class Message implements Serializable {
-    private String event;
-    private Object data;
+public class Message  {
+    private String nick;
+    private String hour;
+    private String msg;
 
-    public Message(String event, Object data) {
-        this.event = event;
-        this.data = data;
+    public Message(String nick, String hour, String msg) {
+        this.nick = nick;
+        this.hour = hour;
+        this.msg = msg;
     }
 
-    public String getEvent() {
-        return event;
+    public String getNick() {
+        return nick;
     }
 
-    public void setEvent(String event) {
-        this.event = event;
+    public void setNick(String nick) {
+        this.nick = nick;
     }
 
-    public Object getData() {
-        return data;
+    public String getHour() {
+        return hour;
     }
 
-    public void setData(Object data) {
-        this.data = data;
+    public void setHour(String hour) {
+        this.hour = hour;
+    }
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
     }
 }

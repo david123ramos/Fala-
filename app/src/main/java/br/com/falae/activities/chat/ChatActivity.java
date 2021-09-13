@@ -39,6 +39,7 @@ import br.com.falae.R;
 import br.com.falae.adapters.MessagesListAdapter;
 import br.com.falae.adapters.UserListAdapter;
 import br.com.falae.echoserver.engine.ClientConnectionWrapper;
+import br.com.falae.echoserver.engine.Message;
 import br.com.falae.echoserver.engine.Server;
 import br.com.falae.echoserver.engine.ServerService;
 import br.com.falae.echoserver.engine.ServerThread;
@@ -48,9 +49,9 @@ import br.com.falae.singletons.Info;
 public class ChatActivity extends AppCompatActivity {
 
     private ClientConnectionWrapper receiver;
-    private ArrayAdapter<String> adapter;
+    private ArrayAdapter<Message> adapter;
     private ComunicationThread sender;
-    private List<String> messages = new ArrayList<String>();
+    private List<Message> messages = new ArrayList<Message>();
     private final Integer port  = 8080;
 
     @Override
@@ -118,7 +119,8 @@ public class ChatActivity extends AppCompatActivity {
                     }
 
                     sender.sendMessage(text);
-                    messages.add("You: "+text+"  at("+getTime()+")");
+                    Message m = new Message("You", getTime(), text);
+                    messages.add(m);
                     incommingMessage();
                 }
 
@@ -127,7 +129,7 @@ public class ChatActivity extends AppCompatActivity {
         });
     }
 
-    public void addMessage(String msg) {
+    public void addMessage(Message msg) {
         messages.add(msg);
         this.incommingMessage();
     }
@@ -157,7 +159,7 @@ public class ChatActivity extends AppCompatActivity {
 
             try {
                 //clientSocket = new Socket(client.getIp(), port);
-                clientSocket = new Socket("10.0.2.2", 8080);
+                clientSocket = new Socket("10.0.2.2", 8081);
                 Log.d("OK","CONEXÃO COM O SERVIDOR ESTABELECIDA");
 
             } catch (IOException e) {

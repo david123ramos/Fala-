@@ -157,8 +157,8 @@ public class ServerService extends Service {
                 OutputStream outputStream = socket.getOutputStream();
                 DataOutputStream dataOutputStream = new DataOutputStream(outputStream);
 
-                Message m = new Message("MYNAMEIS", Info.getInstance().getInfo("NICKNAME") );
-                dataOutputStream.writeUTF(gson.toJson(m));
+                //Message m = new Message("MYNAMEIS", Info.getInstance().getInfo("NICKNAME") );
+                //dataOutputStream.writeUTF(gson.toJson(m));
                 dataOutputStream.flush();
                 dataOutputStream.close();
                 socket.close();
