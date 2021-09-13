@@ -23,7 +23,7 @@ import br.com.falae.singletons.Info;
 
 public class Server extends AsyncTask<User, Void, ClientConnectionWrapper> {
 
-    private static  final int port = 5423;
+    private static  final int port = 8080;
     private Socket clientSocket = null;
     private DataOutputStream os = null;
     private BufferedReader is = null;
@@ -32,7 +32,7 @@ public class Server extends AsyncTask<User, Void, ClientConnectionWrapper> {
 
         try {
 
-            clientSocket = new Socket("127.0.0.1", port);
+            clientSocket = new Socket(client.getIp(), port);
             os = new DataOutputStream(clientSocket.getOutputStream());
             is = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             System.out.println("--------> CONEXÃO ESTABELECIDA");

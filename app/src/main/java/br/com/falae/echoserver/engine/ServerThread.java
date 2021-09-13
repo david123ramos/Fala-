@@ -16,6 +16,7 @@ import java.net.Socket;
 import java.util.Enumeration;
 
 import br.com.falae.activities.chat.ChatActivity;
+import br.com.falae.models.User;
 import br.com.falae.singletons.Info;
 
 public class ServerThread extends Thread {
@@ -26,6 +27,7 @@ public class ServerThread extends Thread {
     private PrintWriter out;
     private BufferedReader in;
     private ChatActivity act;
+    private User client = (User) Info.getInstance().getInfo("CHOOSENCHAT");
     public ServerThread(ChatActivity act) {
         handler = new Handler(act.getMainLooper());
         this.act = act;
@@ -48,9 +50,7 @@ public class ServerThread extends Thread {
                 out = new PrintWriter(clientSocket.getOutputStream(), true);
             }
 
-            out.println("Server: opa");
-
-            while(in.readLine() != null) {
+            while( in.readLine() != null) {
                 String input = in.readLine();
 
                 if (input.equals("bye")) {
@@ -62,12 +62,15 @@ public class ServerThread extends Thread {
                 }
 
                 System.out.println(input);
+
                 out.println("received: " + input);
+                out.flush();
+
 
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        act.addMessage(input);
+                        act.addMessage(client.getNick()+" "+input + "  at ( " +act.getTime()+ ")");
                     }
                 });
 
